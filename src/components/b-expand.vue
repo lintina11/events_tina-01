@@ -3,7 +3,7 @@ import { ref, reactive } from 'vue'
 import { NSpace, NButton,NLayout } from 'naive-ui'
 
 
-// 拖曳效果
+// 展開效果
 const items = ref([
     { id: 1, text: '項目1' , url: './src/assets/pz1.jpg'},
     { id: 2, text: '項目2' , url: './src/assets/pz2.jpg'},
@@ -32,8 +32,6 @@ function moreDown() {
         <div class="comment-list">
             <div  v-for="(item,index) in items" >
                 <div class="list" v-if="index <= active">
-                    {{ index }}
-                    {{ active }}
                     {{ item.text }}
                 </div>
             </div>

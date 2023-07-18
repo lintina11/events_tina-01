@@ -4,7 +4,7 @@ import { NRow, NCol, NSpace, NButton, NLayout, NLayoutHeader, NLayoutContent, NL
 import topbar from '../components/topbar.vue'
 import bMatching from '../components/b-matching.vue'
 import bExpand from '../components/b-expand.vue'
-import test2 from '../components/test2.vue'
+import bOdometer from '../components/b-odometer.vue'
 
 
 </script>
@@ -12,9 +12,8 @@ import test2 from '../components/test2.vue'
 <template>
     <topbar/>
     <bMatching/>
+    <bOdometer/>
     <bExpand/>
-    <test2/>
-
     <n-space>
         <n-button>Default</n-button>
         <n-button type="tertiary">
