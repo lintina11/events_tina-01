@@ -45,8 +45,11 @@ header {
     background-color: #111;
     height: 50px;
     padding: 10px 0;
-    position: relative;
-    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     &::before {
         content: '';
         width: 0;
@@ -83,8 +86,8 @@ nav {
     right: -195px;
     width: 200px;
     box-sizing: border-box;
-    background-image: linear-gradient(#FA5168cc, #CF1AA7);
-    border-left: 5px solid #CF1AA7;
+    background-image: linear-gradient(#000000cc, #222);
+    border-left: 5px solid #111;
     z-index: 10;
     transition: .3s;
     .menu {

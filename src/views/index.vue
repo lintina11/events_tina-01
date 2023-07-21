@@ -1,20 +1,26 @@
 <script setup>
 import { ref } from 'vue';
-import { NRow, NCol, NSpace, NButton, NLayout, NLayoutHeader, NLayoutContent, NLayoutSider, NLayoutFooter } from 'naive-ui'
+import { NRow, NCol, NSpace, NButton, NGrid,NGi } from 'naive-ui'
 import topbar from '../components/topbar.vue'
+import mainIntro from '../components/mainIntro.vue'
 import bMatching from '../components/b-matching.vue'
-import bExpand from '../components/b-expand.vue'
 import bOdometer from '../components/b-odometer.vue'
+// import test from '../components/test.vue'
 
 
 </script>
 
 <template>
-    <topbar/>
-    <bMatching/>
-    <bOdometer/>
-    <bExpand/>
-    <n-space>
+    <topbar />
+    <mainIntro/>
+    <bMatching />
+    <n-row gutter="0">
+        <n-col :span="24">
+            <bOdometer />
+        </n-col>
+    </n-row>
+
+    <!-- <n-space>
         <n-button>Default</n-button>
         <n-button type="tertiary">
             Tertiary
@@ -34,39 +40,11 @@ import bOdometer from '../components/b-odometer.vue'
         <n-button type="error">
             Error
         </n-button>
-    </n-space>
-    <n-row gutter="0">
-        <n-col :span="6">
-            <div class="light-green" />
-        </n-col>
-        <n-col :span="6">
-            <div class="green" />
-        </n-col>
-        <n-col :span="6">
-            <div class="light-green" />
-        </n-col>
-        <n-col :span="6">
-            <div class="green" />
-        </n-col>
-    </n-row>
+    </n-space> -->
 </template>
 
 
 <style scoped>
-.n-layout-header,
-.n-layout-footer {
-    background: rgba(128, 128, 128, 0.2);
-    padding: 24px;
-}
-
-.n-layout-sider {
-    background: rgba(128, 128, 128, 0.3);
-}
-
-.n-layout-content {
-    background: rgba(128, 128, 128, 0.4);
-}
-
 .light-green {
     height: 108px;
     background-color: rgba(0, 128, 0, 0.12);

@@ -1,4 +1,5 @@
 @import 'reset-css';
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@800&display=swap');
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -14,6 +15,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+body{
+  padding-top: 70px;
 }
 
 a {
@@ -37,6 +42,7 @@ a:hover {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: 'Merienda', cursive;
 }
 
 .card {
@@ -46,7 +52,7 @@ h1 {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #352147;
     background-color: #ffffff;
   }
   a:hover {
@@ -56,3 +62,4 @@ h1 {
     background-color: #f9f9f9;
   }
 }
+
