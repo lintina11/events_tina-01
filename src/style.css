@@ -42,13 +42,30 @@ a:hover {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  font-family: 'Merienda', cursive;
+  font-family: 'Merienda', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .card {
   padding: 2em;
 }
 
+input[type="text"]{
+  /* background-color: #ccc8; */
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 5px;
+}
+input[type="submit"]{
+  color: #fff;
+  background-image: linear-gradient(65deg, #FA5168, #CF1AA7);
+  border-radius: 30px;
+  padding: 10px 25px;
+  border: none;
+  transition: .3s;
+}
+input[type="submit"]:hover{
+  background-image: linear-gradient(165deg, #CF1AA7,#FA5168 );
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -62,4 +79,3 @@ h1 {
     background-color: #f9f9f9;
   }
 }
-
