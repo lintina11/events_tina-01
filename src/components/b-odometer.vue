@@ -1,11 +1,10 @@
 <script setup>
-import { ref, reactive, onMounted, onUnmounted, computed } from 'vue'
-import { NSpace, NButton, NLayout } from 'naive-ui'
+import { ref, reactive, onMounted } from 'vue'
 
 
 // 拖曳效果
 const items = reactive([
-    { id: 1, text: '案讚人次', icon: '😍' },
+    { id: 1, text: '按讚人次', icon: '😍' },
     { id: 2, text: '瀏覽人次', icon: '😎' },
     { id: 3, text: '活動聲量', icon: '😊' },
     { id: 4, text: '贊助人次', icon: '😲' }
@@ -19,27 +18,41 @@ const endValues = [60, 124, 39, 101]
 //     }
 // })
 let interval = null
+let odometerHandler = true
 function odometer() {
-    interval = setInterval(() => {
-        values.value.forEach((value, index) => {
-            if (value < endValues[index]) {
-                values.value[index] += 1; // 跳表的步长，根据需求调整
-                console.log("here")
-            } else if (value == Math.max(...endValues)) {
-                clearInterval(interval);
-            }
-        });
-    }, 10);
+    if (odometerHandler) {
+        interval = setInterval(() => {
+            values.value.forEach((value, index) => {
+                if (value < endValues[index]) {
+                    values.value[index] += 1; // 跳表的級距，根據需求調整
+                } else if (value == Math.max(...endValues)) {
+                    clearInterval(interval);
+                }
+            });
+        }, 10);
+    }
 }
 
-// 在组件挂载时启动动画
-onMounted(odometer);
-
+// 頁面載入後啟動
+onMounted(() => {
+    // 啟動里程器
+    (function () {
+        let odometerSelf = ref(document.querySelector('#odometerSelf'))
+        let windowH = window.screen.height
+        window.addEventListener("scroll", () => {
+            let odometerTop = Math.floor(odometerSelf.value.getBoundingClientRect().top)
+            if (odometerTop < windowH * 2 / 3) {
+                odometer()
+                odometerHandler = false
+            }
+        }, false)
+    })()
+});
 </script>
 
 <template>
     <div class="odometer-wrap">
-        <div class="cards" @click="odometer">
+        <div id="odometerSelf" class="cards" @click="odometer">
             <div class="card" v-for="(item, index) in items" :key="index" @click="values[index]++">
                 <div class="icon">{{ item.icon }}</div>
                 <div class="num">{{ values[index] }}</div>
@@ -64,7 +77,7 @@ onMounted(odometer);
 
 .card {
     padding: 2rem 1rem;
-    background-image: linear-gradient(#ede,transparent);
+    background-image: linear-gradient(#ede, transparent);
     border-radius: 5px;
     width: 200px;
     text-align: center;
