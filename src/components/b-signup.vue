@@ -4,7 +4,7 @@ import { ref, reactive } from 'vue'
 </script>
 
 <template>
-    <div class="sign-up-form">
+    <div class="sign-up-form ticket">
         <h2 class="main-title">立即報名</h2>
         <form action="">
             <ul>
@@ -21,15 +21,13 @@ import { ref, reactive } from 'vue'
                     <input type="text">
                 </li>
                 <li class="form-item">
-                    <label class="input-title">
-                        性別
-                    </label>
+                    <label class="input-title"> 性別 </label>
                     <input name="gender" type="radio" value="male" id="male">
                     <label for="male">男性</label>
-                    
+
                     <input name="gender" type="radio" value="female" id="female">
                     <label for="female">女性</label>
-                    
+
                     <input name="gender" type="radio" value="other" id="gender-other">
                     <label for="gender-other">其他</label>
                 </li>
@@ -57,10 +55,7 @@ import { ref, reactive } from 'vue'
 }
 
 .sign-up-form {
-    height: 70vh;
-    margin: 10vh auto;
     padding: 30px;
-    background-color: #fff;
 
     .main-title {
         font-size: 2rem;
@@ -78,7 +73,7 @@ import { ref, reactive } from 'vue'
         align-items: center;
     }
 
-    .input-title{
+    .input-title {
         color: #fff;
         background-color: #352147;
         display: inline-block;
@@ -88,5 +83,7 @@ import { ref, reactive } from 'vue'
         font-weight: 700;
         letter-spacing: 2px;
     }
+
 }
+
 </style>
