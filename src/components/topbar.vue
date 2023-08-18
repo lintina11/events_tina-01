@@ -15,7 +15,7 @@ defineProps({
     //   msg: String,
 })
 
-function menuTrigger(){
+function menuTrigger() {
     let nav = document.querySelector("#nav")
     nav.classList.toggle("slide-in")
 }
@@ -34,7 +34,7 @@ function menuTrigger(){
         </button>
         <ul class="menu">
             <li v-for="menu in menus">
-                <a href="">{{ menu }}</a>
+                <a href="#">{{ menu }}</a>
             </li>
         </ul>
     </nav>
@@ -50,6 +50,7 @@ header {
     left: 0;
     right: 0;
     z-index: 10;
+
     &::before {
         content: '';
         width: 0;
@@ -62,7 +63,7 @@ header {
         left: 50%;
         transform: translateX(-50%);
     }
-    
+
 }
 
 .logo {
@@ -86,34 +87,36 @@ nav {
     right: -195px;
     width: 200px;
     box-sizing: border-box;
-    background-image: linear-gradient(#000000cc, #222);
+    background-image: linear-gradient(#000c, #222);
     border-left: 5px solid #111;
     z-index: 10;
     transition: .3s;
+
     .menu {
         margin-top: 100px;
-        li{
+
+        li {
             padding: 15px 20px;
         }
+
         a {
             color: #fff;
         }
     }
-    &.slide-in{
-        right: 0; 
+
+    &.slide-in {
+        right: 0;
     }
 }
 
 button {
-    color: #fff;
+    color: #222;
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    background-color: #222;
+    background-color: #fefc;
     // border: 1px solid #fff;
     position: absolute;
     top: 20px;
     left: -50px;
-}
-
-</style>
+}</style>

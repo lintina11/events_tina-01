@@ -1,5 +1,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import { NAvatarGroup } from 'naive-ui'
+
 
 
 // 拖曳效果
@@ -12,11 +14,7 @@ const items = reactive([
 
 const values = ref([0, 0, 0, 0])
 const endValues = [60, 124, 39, 101]
-// const endValuess = computed(()=>{
-//     for( let i=0; i<items.value.length ;i++){
-//         endValues.push(items.value[i].val)
-//     }
-// })
+
 let interval = null
 let odometerHandler = true
 function odometer() {
@@ -48,6 +46,32 @@ onMounted(() => {
         }, false)
     })()
 });
+
+// 贊助人資料
+const options = reactive(
+    [
+        {
+            name: 'Leonardo DiCaprio',
+            src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+        },
+        {
+            name: 'Jennifer Lawrence',
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        },
+        {
+            name: 'Audrey Hepburn',
+            src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+        },
+        {
+            name: 'Anne Hathaway',
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        },
+        {
+            name: 'Taylor Swift',
+            src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+        }
+    ]
+)
 </script>
 
 <template>
@@ -57,6 +81,7 @@ onMounted(() => {
                 <div class="icon">{{ item.icon }}</div>
                 <div class="num">{{ values[index] }}</div>
                 <div class="phrase">{{ item.text }}</div>
+                <n-avatar-group :options="options" :size="30" :max="3" />
             </div>
         </div>
     </div>
@@ -98,5 +123,8 @@ onMounted(() => {
         font-weight: 700;
         font-size: 20px;
     }
+}
+.n-avatar-group{
+    margin: 20px 0;
 }
 </style>
