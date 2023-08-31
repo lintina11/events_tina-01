@@ -21,7 +21,7 @@ defineProps(
 
 
 <style>
-h2,p,span {
+h2,p {
     width: 100%;
     display: inline-block;
     text-align: center;

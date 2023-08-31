@@ -11,9 +11,7 @@ fetch(`./src/data/public.json`)
         })
     .catch(err => console.log(err))
 
-defineProps({
-    //   msg: String,
-})
+
 
 function menuTrigger() {
     let nav = document.querySelector("#nav")
@@ -34,7 +32,7 @@ function menuTrigger() {
         </button>
         <ul class="menu">
             <li v-for="menu in menus">
-                <a href="#">{{ menu }}</a>
+                <a :href="menu.link">{{ menu.title }}</a>
             </li>
         </ul>
     </nav>

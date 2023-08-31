@@ -18,15 +18,14 @@ library.add( faBars )
 
 import App from './App.vue'
 import Home from './views/index.vue'
+import Page01 from './views/page01.vue'
 
-const routes = [
-    { path: '/', component: Home }
-]
 
 const router = createRouter( {
     history: createWebHistory(),
     routes:[
-        { path:'/',name:'Home',component: Home}
+        { path:'/',name:'Home',component: Home},
+        { path:'/page01',name:'page01', component: Page01 }
     ]
 })
 
