@@ -20,6 +20,9 @@ import transitioner from '../components/test/transition.vue'
     <!-- emit -->
     <emit @increaseBy="plus" :count="count" />
     <hr>
+    
+    <!-- transition -->
+    <transitioner/>
     <!-- slot -->
     <sloter>
         <template v-slot:certain-slot>
@@ -33,8 +36,6 @@ import transitioner from '../components/test/transition.vue'
         </p>
     </sloter>
     <hr>
-    <!-- transition -->
-    <transitioner/>
 
 </template>
 <style lang="scss" scoped></style>

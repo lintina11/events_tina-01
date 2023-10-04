@@ -4,48 +4,47 @@ import { ref, reactive } from 'vue'
 const isShow = ref(true)
 function showToggle() {
     isShow.value = !isShow.value
-    console.log(isShow.value)
 }
 </script> 
 
 <template>
-    <transition>
-        <div class="box" v-show="isShow">
-            <span>{{ isShow }}</span>
-            <transition>
+    <button @click="showToggle">換 <span>{{ isShow }}</span></button>
+        <transition name="certain" mode="in-out">
+            <div class="box box1" v-show="isShow">
                 <span>
-                    <div class="txt">TRANSITION 111</div>
+                    <div class="txt">1</div>
                 </span>
-            </transition>
-        </div>
-    </transition>
-    <transition name="certain">
-        <div class="box" v-show="!isShow">
-            <span>
-                <div class="txt">TRANSITION 222</div>
-            </span>
-        </div>
-    </transition>
-    <button @click="showToggle">換</button>
+            </div>
+        </transition>
+        <transition name="certain" mode="in-out">
+            <div class="box box2" v-show="!isShow">
+                <span>
+                    <div class="txt">2</div>
+                </span>
+            </div>
+        </transition>
 </template>
 
 
-<style scoped>
+<style lang="scss" scoped>
 .box {
     height: 200px;
-    width: 100%;
+    width: 300px;
+    margin: 0 auto;
+
+    .txt {
+        text-align: center;
+        line-height: 200px;
+        font-size: 40px;
+    }
+}
+
+.box1 {
     background-color: #aaf;
 }
 
-.v-enter-active,
-.v-leave-active {
-    transition: opacity 1s ease;
-}
-
-.v-enter,
-.v-leave-to {
-    opacity: 0;
-    background-color: #fa0;
+.box2 {
+    background-color: #faa;
 }
 
 .certain-enter-active,
@@ -56,6 +55,5 @@ function showToggle() {
 .certain-enter,
 .certain-leave-to {
     opacity: 0;
-    background-color: pink;
 }
 </style>

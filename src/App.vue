@@ -4,21 +4,23 @@ import { ref } from 'vue';
 </script>
 
 <template>
-  <transition>
-    <router-view/>
-    <router-view/>
-  </transition>
+  <router-view v-slot="{ Component }">
+    <transition appear name="fade" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
-
 <style scoped>
-.v-enter-active,.v-leave-active {
-    transition: 1s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: .5s ease;
 }
-
-.v-enter,.v-leave-to {
-    opacity: 0;
-    background-color: #fa0;
-    transform: translateX(-100px);
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-leave,.fade-enter-to{
+  opacity: 1;
 }
 </style>
