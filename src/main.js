@@ -14,18 +14,17 @@ import { faBars  } from '@fortawesome/free-solid-svg-icons'
 /* add icons to the library */
 library.add( faBars )
 
-
-
 import App from './App.vue'
 import Home from './views/index.vue'
-import Page01 from './views/page01.vue'
-
+import test from './views/test.vue'
+import album from './views/album.vue'
 
 const router = createRouter( {
     history: createWebHistory(),
     routes:[
         { path:'/',name:'Home',component: Home},
-        { path:'/page01',name:'page01', component: Page01 }
+        { path:'/test',name:'test', component: test},
+        { path:'/album',name:'album', component: album}
     ]
 })
 
