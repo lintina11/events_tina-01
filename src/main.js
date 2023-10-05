@@ -18,13 +18,15 @@ import App from './App.vue'
 import Home from './views/index.vue'
 import test from './views/test.vue'
 import album from './views/album.vue'
+import tapping from './views/tapping-game.vue'
 
 const router = createRouter( {
     history: createWebHistory(),
     routes:[
         { path:'/',name:'Home',component: Home},
         { path:'/test',name:'test', component: test},
-        { path:'/album',name:'album', component: album}
+        { path:'/album',name:'album', component: album},
+        { path:'/tapping-game',name:'tapping', component: tapping}
     ]
 })
 
