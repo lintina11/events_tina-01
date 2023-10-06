@@ -31,57 +31,44 @@ function tappingFade() {
         }, 50);
     }
     tapItems.forEach(tapItem => {
-
-        tapItem.addEventListener('click', discover, false)
-        tapItem.addEventListener('mousedown', recover, false)
+        tapItem.addEventListener('mousedown', discover, false)
+        tapItem.addEventListener('mouseup', recover, false)
     });
 
 }
 
 function tappingSlide() {
     let tapItems = document.querySelectorAll('.jsTappingSlide')
-    let place = 0
     let timer
-
-    
-
-    function discover(e) {
-        click2.value++
-        if (place < 100) {
-            place += 5
-        } else if (place > 100) {
-            clearInterval(timer)
+    let place = 0
+    function moveCover(tapItem , increment){
+        const tapItemCover = tapItem.querySelector('.jsPicCover')
+        place += increment
+        if(place < 0){
+            place = 0 
+        }else if(place > 100){
             place = 100
         }
-        console.log(place)
-
-        // 重複了
-        let tapItemTarget = e.currentTarget
-        let tapItemCover = tapItemTarget.querySelector('.jsPicCover')
-
         tapItemCover.style.transform = `translateY(${place}%)`
+    }
+    function discover(e) {
+        moveCover(e.currentTarget, 3)
+        
     }
     function recover(e) {
         clearInterval(timer)
-        // 重複了
-        let tapItemTarget = e.currentTarget
-        let tapItemCover = tapItemTarget.querySelector('.jsPicCover')
-
+        const el = e.currentTarget
+        
         timer = setInterval(() => {
-            if (place < 100 && place != 0) {
-                place -= 0.5
-                tapItemCover.style.transform = `translateY(${place}%)`
-                if (place > 100) {
-                    place = 100
-                }
+            if (place > 0) {
+                moveCover(el, -0.5)
             }
         }, 50);
     }
     tapItems.forEach(tapItem => {
-        tapItem.addEventListener('click', discover, false)
-        tapItem.addEventListener('mousedown', recover, false)
+        tapItem.addEventListener('mousedown', discover, false)
+        tapItem.addEventListener('mouseup', recover, false)
     })
-
 }
 
 
@@ -98,7 +85,7 @@ onMounted(() => {
         <div class="tapping-game-box">
             <div class="pic jsTappingFade">
                 <img src="../assets/sc-1.jpg" alt="獎品圖片">
-                <div class="pic-cover jsPicCover"><span>{{click1}}</span></div>
+                <div class="pic-cover jsPicCover"><span>{{ click1 }}</span></div>
             </div>
             <div class="pic jsTappingFade">
                 <img src="../assets/sc-3.jpg" alt="獎品圖片">
@@ -106,10 +93,10 @@ onMounted(() => {
             </div>
             <div class="pic jsTappingSlide">
                 <img src="../assets/sc-2.jpg" alt="獎品圖片">
-                <div class="pic-cover jsPicCover"><span>{{click2}}</span></div>
+                <div class="pic-cover jsPicCover"><span>{{ click2 }}</span></div>
             </div>
             <div class="pic jsTappingSlide">
-                <img src="../assets/sc-4.jpg" alt="獎品圖片">
+                <img src="../assets/sc-5.jpg" alt="獎品圖片">
                 <div class="pic-cover jsPicCover"><span>Click!</span></div>
             </div>
         </div>
