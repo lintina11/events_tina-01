@@ -39,38 +39,41 @@ function tappingFade() {
 
 function tappingSlide() {
     let tapItems = document.querySelectorAll('.jsTappingSlide')
-    let timer
-    let place = 0
-    function moveCover(tapItem , increment){
+    let timer = {}
+    let place = []
+    function moveCover(tapItem,i, increment) {
         const tapItemCover = tapItem.querySelector('.jsPicCover')
-        place += increment
-        if(place < 0){
-            place = 0 
-        }else if(place > 100){
-            place = 100
+        place[i] = parseFloat(place[i]) + parseFloat(increment)
+        if (place[i] < 0) {
+            place[i] = 0
+        } else if (place[i] > 100) {
+            place[i] = 100
         }
-        tapItemCover.style.transform = `translateY(${place}%)`
+        tapItemCover.style.transform = `translateY(${place[i]}%)`
     }
-    function discover(e) {
-        moveCover(e.currentTarget, 3)
-        
+    function discover(e,i) {
+        let el = e.currentTarget
+        moveCover(el,i,5)
     }
-    function recover(e) {
-        clearInterval(timer)
-        const el = e.currentTarget
-        
-        timer = setInterval(() => {
-            if (place > 0) {
-                moveCover(el, -0.5)
+    function recover(e,i) {
+        clearInterval(timer[i])
+        let el = e.currentTarget
+        timer[i] = setInterval(() => {
+            if (place[i] > 0 && place[i] != 100) {
+                moveCover(el,i,-1)
             }
         }, 50);
     }
-    tapItems.forEach(tapItem => {
-        tapItem.addEventListener('mousedown', discover, false)
-        tapItem.addEventListener('mouseup', recover, false)
+    tapItems.forEach((tapItem,i) => {
+        place.push(0)
+        tapItem.addEventListener('mousedown', function(e){
+            discover(e,i)
+        }, false)
+        tapItem.addEventListener('mouseup', function(e){
+            recover(e,i)
+        }, false)
     })
 }
-
 
 onMounted(() => {
     tappingFade()
@@ -91,11 +94,11 @@ onMounted(() => {
                 <img src="../assets/sc-3.jpg" alt="獎品圖片">
                 <div class="pic-cover jsPicCover"><span>Click!</span></div>
             </div>
-            <div class="pic jsTappingSlide">
+            <div class="pic jsTappingSlide" data-id="1">
                 <img src="../assets/sc-2.jpg" alt="獎品圖片">
                 <div class="pic-cover jsPicCover"><span>{{ click2 }}</span></div>
             </div>
-            <div class="pic jsTappingSlide">
+            <div class="pic jsTappingSlide" data-id="2">
                 <img src="../assets/sc-5.jpg" alt="獎品圖片">
                 <div class="pic-cover jsPicCover"><span>Click!</span></div>
             </div>
