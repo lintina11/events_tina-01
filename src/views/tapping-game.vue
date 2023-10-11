@@ -1,38 +1,47 @@
 <script setup>
-import { onMounted, ref, reactive } from 'vue'
+import { onMounted, ref } from 'vue'
 import topbar from '../components/topbar.vue'
-const click1 = ref(0)
-const click2 = ref(0)
 
 function tappingFade() {
     let tapItems = document.querySelectorAll('.jsTappingFade')
-    let opacity = 1
-    let timer
-    function discover(e) {
-        click1.value++
-        if (opacity > 0.05) {
-            opacity -= 0.1
-        } else if (opacity < 0.05) {
-            clearInterval(timer)
-            opacity = 0
+    let opacity = []
+    let timer = {}
+    //遮罩淡化動畫
+    function fadeCover(tapItem, i, increment) {
+        const tapItemCover = tapItem.querySelector('.jsPicCover')
+        if (opacity[i] > 0.05) {
+            opacity[i] -= increment
+        } else if (opacity[i] < 0.05) {
+            clearInterval(timer[i])
+            opacity[i] = 0
         }
-        e.target.style.opacity = opacity
+        tapItemCover.style.opacity = opacity[i]
     }
-    function recover(e) {
-        clearInterval(timer)
-        timer = setInterval(() => {
-            if (opacity < 1 && opacity != 0) {
-                opacity += 0.02
-                e.target.style.opacity = opacity
-                if (opacity > 1) {
-                    opacity = 1
+    // 點擊遮罩變淡
+    function discover(e, i) {
+        const el = e.currentTarget
+        fadeCover(el, i, 0.1)
+        console.log(timer)
+    }
+    // 停止點擊，遮罩回復
+    function recover(e, i) {
+        clearInterval(timer[i])
+        const el = e.currentTarget
+        timer[i] = setInterval(() => {
+            if (opacity[i] < 1 && opacity[i] != 0) {
+                fadeCover(el, i, -0.02)
+                if (opacity[i] > 1) {
+                    opacity[i] = 1
                 }
+            } else {
+                clearInterval(timer[i])
             }
         }, 50);
     }
-    tapItems.forEach(tapItem => {
-        tapItem.addEventListener('mousedown', discover, false)
-        tapItem.addEventListener('mouseup', recover, false)
+    tapItems.forEach((tapItem, i) => {
+        opacity.push(1)
+        tapItem.addEventListener('mousedown', e => discover(e, i), false)
+        tapItem.addEventListener('mouseup', e => recover(e, i), false)
     });
 
 }
@@ -41,9 +50,10 @@ function tappingSlide() {
     let tapItems = document.querySelectorAll('.jsTappingSlide')
     let timer = {}
     let place = []
-    function moveCover(tapItem,i, increment) {
+    // 遮罩滑動動畫
+    function moveCover(tapItem, i, increment) {
         const tapItemCover = tapItem.querySelector('.jsPicCover')
-        place[i] = parseFloat(place[i]) + parseFloat(increment)
+        place[i] += increment;
         if (place[i] < 0) {
             place[i] = 0
         } else if (place[i] > 100) {
@@ -51,27 +61,30 @@ function tappingSlide() {
         }
         tapItemCover.style.transform = `translateY(${place[i]}%)`
     }
-    function discover(e,i) {
+    // 點擊遮罩滑動
+    function discover(e, i) {
         let el = e.currentTarget
-        moveCover(el,i,5)
+        // 傳入(當前點擊元素,元素序列index,遮罩變動量(%))
+        moveCover(el, i, 6)
     }
-    function recover(e,i) {
+    // 停止點擊，遮罩回復
+    function recover(e, i) {
         clearInterval(timer[i])
         let el = e.currentTarget
         timer[i] = setInterval(() => {
             if (place[i] > 0 && place[i] != 100) {
-                moveCover(el,i,-1)
+                // 傳入(當前點擊元素,元素序列index,遮罩回復量(%數))
+                moveCover(el, i, -1)
+            } else {
+                clearInterval(timer[i])
             }
-        }, 50);
+            console.log(i)
+        }, 50);// 回復速度50
     }
-    tapItems.forEach((tapItem,i) => {
+    tapItems.forEach((tapItem, i) => {
         place.push(0)
-        tapItem.addEventListener('mousedown', function(e){
-            discover(e,i)
-        }, false)
-        tapItem.addEventListener('mouseup', function(e){
-            recover(e,i)
-        }, false)
+        tapItem.addEventListener('mousedown', e => discover(e, i))
+        tapItem.addEventListener('mouseup', e => recover(e, i))
     })
 }
 
@@ -88,21 +101,40 @@ onMounted(() => {
         <div class="tapping-game-box">
             <div class="pic jsTappingFade">
                 <img src="../assets/sc-1.jpg" alt="獎品圖片">
-                <div class="pic-cover jsPicCover"><span>{{ click1 }}</span></div>
+                <div class="pic-cover jsPicCover">
+                    <span>1</span>
+                </div>
             </div>
             <div class="pic jsTappingFade">
                 <img src="../assets/sc-3.jpg" alt="獎品圖片">
-                <div class="pic-cover jsPicCover"><span>Click!</span></div>
+                <div class="pic-cover jsPicCover">
+                    <span>2</span>
+                </div>
             </div>
-            <div class="pic jsTappingSlide" data-id="1">
+            <div class="pic jsTappingSlide">
                 <img src="../assets/sc-2.jpg" alt="獎品圖片">
-                <div class="pic-cover jsPicCover"><span>{{ click2 }}</span></div>
+                <div class="pic-cover jsPicCover">
+                    <span>3</span>
+                </div>
             </div>
-            <div class="pic jsTappingSlide" data-id="2">
+            <div class="pic jsTappingSlide">
                 <img src="../assets/sc-5.jpg" alt="獎品圖片">
-                <div class="pic-cover jsPicCover"><span>Click!</span></div>
+                <div class="pic-cover jsPicCover">
+                    <span>4</span>
+                </div>
             </div>
         </div>
+        <div class="another-game-box">
+            <div class="another-game-box-inner">
+                <div class="pic jsTappingSlide">
+                    <img src="../assets/sc-5.jpg" alt="獎品圖片">
+                    <div class="pic-cover jsPicCover">
+                        <span>click</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -114,38 +146,58 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.another-game-box {
+    text-align: center;
+    background-image: linear-gradient(#fc0 40%, transparent 40%);
+
+    &-inner {
+        display: inline-block;
+        margin: 0 auto;
+    }
 
     .pic {
-        width: 300px;
-        height: 300px;
-        position: relative;
-        user-select: none;
-        border: 3px solid #fff;
-        overflow: hidden;
-
-        img {
-            width: 100%;
-        }
+        border-radius: 50%;
+        width: 500px;
+        height: 500px;
 
         .pic-cover {
-            text-align: center;
-            vertical-align: middle;
-            line-height: 300px;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #222;
-            opacity: 1;
-
-            span {
-                color: #fff;
-                font-size: 30px;
-                pointer-events: none;
-            }
+            background-color: #334;
         }
-
     }
+}
+
+.pic {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    user-select: none;
+    border: 3px solid #fff;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+    }
+
+    .pic-cover {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 300px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #222;
+        opacity: 1;
+
+        span {
+            color: #fff;
+            font-size: 30px;
+            pointer-events: none;
+        }
+    }
+
 }
 </style>
