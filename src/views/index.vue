@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { NRow, NCol } from 'naive-ui'
 import topbar from '../components/topbar.vue'
 import bTitle from '../components/b-title.vue'
@@ -16,7 +16,7 @@ const count = ref(99)
 </script>
 
 <template>
-    <div class="home">
+    <div class="home" data-scroll>
         <topbar />
         <mainIntro />
         <bMatching />

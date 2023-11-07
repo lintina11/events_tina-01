@@ -40,10 +40,9 @@ function tappingFade() {
     }
     tapItems.forEach((tapItem, i) => {
         opacity.push(1)
-        tapItem.addEventListener('mousedown', e => discover(e, i), false)
+        tapItem.addEventListener('click', e => discover(e, i), false)
         tapItem.addEventListener('mouseup', e => recover(e, i), false)
     });
-
 }
 
 function tappingSlide() {
@@ -79,11 +78,11 @@ function tappingSlide() {
                 clearInterval(timer[i])
             }
             console.log(i)
-        }, 50);// 回復速度50
+        }, 40);// 回復速度40
     }
     tapItems.forEach((tapItem, i) => {
         place.push(0)
-        tapItem.addEventListener('mousedown', e => discover(e, i))
+        tapItem.addEventListener('click', e => discover(e, i))
         tapItem.addEventListener('mouseup', e => recover(e, i))
     })
 }
@@ -126,8 +125,8 @@ onMounted(() => {
         </div>
         <div class="another-game-box">
             <div class="another-game-box-inner">
-                <div class="pic jsTappingSlide">
-                    <img src="../assets/sc-5.jpg" alt="獎品圖片">
+                <div class="pic jsTappingFade">
+                    <img src="../assets/sc-6.jpg" alt="獎品圖片">
                     <div class="pic-cover jsPicCover">
                         <span>click</span>
                     </div>
@@ -151,7 +150,7 @@ onMounted(() => {
 .another-game-box {
     text-align: center;
     background-image: linear-gradient(#fc0 40%, transparent 40%);
-
+    height: 100vh;
     &-inner {
         display: inline-block;
         margin: 0 auto;
@@ -159,8 +158,9 @@ onMounted(() => {
 
     .pic {
         border-radius: 50%;
-        width: 500px;
-        height: 500px;
+        width: 40%;
+        height: 40%;
+        min-width: 300px;
 
         .pic-cover {
             background-color: #334;
@@ -175,7 +175,6 @@ onMounted(() => {
     user-select: none;
     border: 3px solid #fff;
     overflow: hidden;
-
     img {
         width: 100%;
     }
@@ -198,6 +197,5 @@ onMounted(() => {
             pointer-events: none;
         }
     }
-
 }
 </style>

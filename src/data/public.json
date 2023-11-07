@@ -1,8 +1,9 @@
 {
     "menu":[ 
-        {"title":"回首頁","link":"/page01"},
-        {"title":"活動辦法","link":"/page02"},
-        {"title":"參加資格","link":"/page03"},
-        {"title":"重要公告","link":"/page04"}
+        {"title":"回首頁","link":"/"},
+        {"title":"基本語法測試區","link":"/test"},
+        {"title":"社群相簿","link":"/album"},
+        {"title":"點擊刮刮樂","link":"/tapping-game"},
+        {"title":"區塊飛進","link":"/flyin-template"}
     ]
 }

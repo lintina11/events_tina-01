@@ -1,5 +1,6 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import { scrollTrigger } from '../main.js'
 
 const menus = reactive({})
 
@@ -11,13 +12,14 @@ fetch(`./src/data/public.json`)
         })
     .catch(err => console.log(err))
 
-
-
 function menuTrigger() {
     let nav = document.querySelector("#nav")
     nav.classList.toggle("slide-in")
 }
 
+onMounted(() => {
+    scrollTrigger()
+})
 </script>
 
 <template>
@@ -32,7 +34,8 @@ function menuTrigger() {
         </button>
         <ul class="menu">
             <li v-for="menu in menus">
-                <a :href="menu.link">{{ menu.title }}</a>
+                <!-- <a :href="menu.link">{{ menu.title }}</a> -->
+                <router-link :to="menu.link">{{ menu.title }}</router-link>
             </li>
         </ul>
     </nav>
@@ -61,7 +64,6 @@ header {
         left: 50%;
         transform: translateX(-50%);
     }
-
 }
 
 .logo {
@@ -94,27 +96,66 @@ nav {
         margin-top: 100px;
 
         li {
-            padding: 15px 20px;
+            overflow: hidden;
+            border-bottom: 1px solid #444;
+            // outline: 1px solid red;
         }
 
         a {
+            padding: 25px 20px;
             color: #fff;
+            display: block;
         }
     }
 
     &.slide-in {
         right: 0;
+
+        .menu li a {
+            // outline: 1px solid yellow;
+            animation: hbg-en .5s ease-out forwards;
+        }
+
+        button {
+            border: 1px solid #555;
+        }
+    }
+
+    &.is-sink {
+        button {
+            background-color: #f7f7f7;
+            color: #222;
+            top: 20px;
+            left: -70px;
+        }
     }
 }
 
 button {
-    color: #222;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: #fefc;
-    // border: 1px solid #fff;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: -50px;
-}</style>
+    font-size: 20px;
+    transition: .5s;
+}
+
+@keyframes hbg-en {
+    0% {
+        transform: translateY(100%);
+    }
+
+    45% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+</style>
